@@ -5,16 +5,12 @@
 }
 
 <h2>Overdue Tasks</h2>
-@{ 
+@{
     Html.RenderPartial("Overdue");
 
 }
-<h2>Completed Tasks</h2>
-@{
-    Html.RenderPartial("CompletedTasks");
-}
-<h2>All Open Tasks</h2>
 
+<h2>All Open Tasks</h2>
 
 
 <p>
@@ -26,49 +22,58 @@
             @Html.DisplayNameFor(model => model.IsDone)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DueDate)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
+
         <th>
             @Html.DisplayNameFor(model => model.List.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.DueDate)
         </th>
-       
-       
+
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            <a href="@Url.Action("ToggleDone", new { id=item.Id})">
-               @if (item.IsDone)
-               {
-                  <span class="glyphicon glyphicon-check"></span>
-               }
-               else
-               {
-                   <span class="glyphicon glyphicon-unchecked"></span>
-               }
-            </a>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.List.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-     
-        <td>
-            @Html.DisplayFor(modelItem => item.DueDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        if (item.IsDone == false)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("ToggleDone", new { id = item.Id })">
+                        @if (item.IsDone)
+                        {
+                            <span class="glyphicon glyphicon-check"></span>
+                        }
+                        else
+                        {
+                            <span class="glyphicon glyphicon-unchecked"></span>
+                        }
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.List.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.DueDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
 
 </table>
+<h2>Completed Tasks</h2>
+@{
+    Html.RenderPartial("CompletedTasks");
+}
