@@ -6,8 +6,15 @@
 
 <h2>Overdue Tasks</h2>
 @{ 
-    Html.RenderPartial("Overdue reminder");
+    Html.RenderPartial("Overdue");
+
 }
+<h2>Completed Tasks</h2>
+@{
+    Html.RenderPartial("CompletedTasks");
+}
+<h2>All Open Tasks</h2>
+
 
 
 <p>
@@ -35,7 +42,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.IsDone)
+            <a href="@Url.Action("ToggleDone", new { id=item.Id})">
+               @if (item.IsDone)
+               {
+                  <span class="glyphicon glyphicon-check"></span>
+               }
+               else
+               {
+                   <span class="glyphicon glyphicon-unchecked"></span>
+               }
+            </a>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.List.Title)

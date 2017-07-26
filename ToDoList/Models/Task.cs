@@ -11,8 +11,11 @@ namespace ToDoList.Models
     {
         [Key]
         public int Id { get; set; }        
+        [Display(Name ="Task Name")]
         public string Description { get; set; }
         public bool IsDone { get; set; }
+
+        [Display(Name ="Due Date")]
         public DateTime DueDate { get; set; }
 
         [ForeignKey("List")]

@@ -20,7 +20,7 @@
 
     @foreach (var item in Model)
     {
-        if (item.DueDate < DateTime.Now && item.IsDone == false)
+        if (item.IsDone == true)
         {
             <tr>
                 <td>
